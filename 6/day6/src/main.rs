@@ -74,7 +74,7 @@ fn main(){
         }
         let mut vec_solutions : Vec<u32> = Vec::new();
         let mut i: usize = 0;
-
+        // bruteforcing the shit out of this because small numbers
         while i < vec_time.len(){
             vec_solutions.push(get_number_of_possibilities(vec_time[i], vec_dist[i]));
             i+=1;
@@ -100,7 +100,7 @@ fn main(){
         **  -a x^2 +time x - distance
         **  solving for x gives us two boundaries and we just calculate the diff inbetween.
         */
-        
+
         let a : f64 = -1.0;
      
         let discriminant = time * time - 4.0 * a * (-dist);
