@@ -36,39 +36,30 @@ fn main(){
                 instructions = line.chars().collect();
             }else if line_num != 1{
                 let (key, values) = get_data(&line);
-                let cloned_val = values.clone();
-                let cloned_key = key.clone();
                 map.insert(key, (values.0, values.1));
-                if let Some(last_char) = cloned_key.chars().next_back() {
-                    if last_char == 'A'{
-                        vec_of_node.push(cloned_val);
-                    }
-                } else {
-                    println!("String is empty.");
-                }
+                
                 
             }
         }
     }
-    println!("node at start: {:?}", vec_of_node);
-//     let mut i : usize = 0 as usize;
-//     let len = instructions.len();
-//     println!("node at start: {:?}", vec_of_node);
-//     loop{
-//         // println!("instruction: {:?}", instructions[i%len as usize] );
+    let mut i : usize = 0 as usize;
+    let len = instructions.len();
+    node = map.get("AAA").unwrap().clone();
+     println!("node at start: {:?}", node);
+    loop{
+        // println!("instruction: {:?}", instructions[i%len as usize] );
+         println!("node: {:?}", node);
+        node = if instructions[i%len as usize] == 'R'{  map.get(&node.1).unwrap().clone() }else{ map.get(&node.0).unwrap().clone() };
+        i+=1;
+        let right = node.1.clone();
+        let left = node.0.clone();
         
-//         let instruction = instructions[i%len as usize]
-//         node = if instructions[i%len as usize] == 'R'{  map.get(&node.1).unwrap().clone() }else{ map.get(&node.0).unwrap().clone() };
-//         i+=1;
-//         let right = node.1.clone();
-//         let left = node.0.clone();
-        
-//         if (right.to_string() == "ZZZ" && instructions[i%len as usize] == 'R' )|| (instructions[i%len as usize] == 'L' && left.to_string() =="ZZZ"){
-//             i+=1;
-//             break;
-//         }
+        if (right.to_string() == "ZZZ" && instructions[i%len as usize] == 'R' )|| (instructions[i%len as usize] == 'L' && left.to_string() =="ZZZ"){
+            i+=1;
+            break;
+        }
     
-//     }
+    }
 
-//     println!("number of steps: {:?}", i);
+    println!("number of steps: {:?}", i);
 }
