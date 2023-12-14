@@ -8,18 +8,14 @@ fn count_arrangements(input:String) ->usize{
     let input_vec :Vec<&str> = input.split(" ").collect();
     let  group_sizes: Vec<usize> = input_vec[1].split(",").map(|x| x.parse::<usize>().unwrap_or(usize::MIN)).collect::<Vec<usize>>();
     let mut string_line : Vec<char> = input_vec[0].chars().collect();
+    //trim all useless characters
     while string_line[0] == '.'{
         string_line.remove(0);
     }
     return count_arrangements_helper(&string_line, 0, &group_sizes , 0,0)
 }
 fn count_arrangements_helper(spring_line:&Vec<char>, index:usize, group_sizes: &Vec<usize>, group_index : usize, current_group: usize) -> usize{
-    // println!("----Start----");
-    // println!("spring_line :     {:?}", spring_line);
-    // println!("index :           {:?}", index);
-    // println!("croup_sizes :     {:?}", group_sizes);
-    // println!("group_index :     {:?}", group_index);
-    // println!("current :         {:?}", current_group);
+    
 
     
     if index == spring_line.len() {
@@ -35,8 +31,7 @@ fn count_arrangements_helper(spring_line:&Vec<char>, index:usize, group_sizes: &
 
 
     for c  in vec!['.','#'].iter(){
-        // println!("c is :            {:?}", c);
-        // println!("spring[index]:    {:?}", c);
+       
         if spring_line[index] == *c || spring_line[index]=='?'{
             if *c =='.' && current_group == 0{
                 count += count_arrangements_helper(spring_line,index+1, group_sizes,group_index,0);
